@@ -2,7 +2,7 @@
   "name": "todo",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://abdullah-alali.com/New-Day/",
+  "homepage": "http://abdullah-alali.com/New-Day/",
   "dependencies": {
     "@date-io/date-fns": "^1.1.0",
     "@material-ui/core": "^3.9.2",
