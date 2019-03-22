@@ -58,7 +58,8 @@ const styles = theme => ({
 });
 
 function ResponsiveLayout (props) {
-  const { classes, tasks, dispatchTasks, signOut } = props;
+  const { classes, tasks, dispatchTasks, signOut, isGuest} = props;
+  const [guestId, setGuestId] = React.useState(1);
   const [isProfile, setIsProfile] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [openCategory, setOpenCategory] = React.useState('');
@@ -156,12 +157,22 @@ function ResponsiveLayout (props) {
       setIsLoading(true);
       let content = JSON.stringify(convertToRaw(editorState.getCurrentContent()));
       let taskToAdd = Object.assign({}, currentTask, {content});
-      let res = await axios.post(constants.serverWith('/api/task/add'), {...taskToAdd}, {headers: {token: localStorage.getItem('token')}});
-      taskToAdd.id = res.data.result;
+      if (!isGuest) {
+        let res = await axios.post(constants.serverWith('/api/task/add'), {...taskToAdd}, {headers: {token: localStorage.getItem('token')}});
+        taskToAdd.id = res.data.result;
+      } else {
+        taskToAdd.id = guestId;
+        setGuestId(x => x + 1);
+      }
       dispatchTasks({type: 'ADD_TASK', payload: taskToAdd});
       setIsLoading(false);
       setSnackbarVariant('success');
       setSnackbarMessage('Added Task');
+
+      setCurrentTask(null);
+      setEditorState(EditorState.createEmpty());
+      setIsAddingNewTask(false);
+
     } catch (e) {
       console.log(e.message);
       setIsLoading(false);
@@ -180,13 +191,21 @@ function ResponsiveLayout (props) {
       setIsLoading(true);
       let content = JSON.stringify(convertToRaw(editorState.getCurrentContent()));
       let taskToUpdate = Object.assign({}, currentTask, {content});
-      let res = await axios.post(constants.serverWith('/api/task/update'), {...taskToUpdate}, {headers: {token: localStorage.getItem('token')}});
-      if (!res.data.error) {
+      if (!isGuest) {
+        let res = await axios.post(constants.serverWith('/api/task/update'), {...taskToUpdate}, {headers: {token: localStorage.getItem('token')}});
+        if (!res.data.error) {
+          dispatchTasks({type: 'UPDATE_TASK', payload: taskToUpdate});
+        }
+      } else {
         dispatchTasks({type: 'UPDATE_TASK', payload: taskToUpdate});
       }
       setIsLoading(false);
       setSnackbarVariant('success');
       setSnackbarMessage('Updated Task');
+
+      setCurrentTask(null);
+      setEditorState(EditorState.createEmpty());
+
     } catch (e) {
       console.log(e.message);
       setIsLoading(false);
@@ -204,10 +223,11 @@ function ResponsiveLayout (props) {
       <div className={classes.toolbar} />
       <Divider />
       <List>
+        {!isGuest &&
         <ListItem button key={'Profile'} onClick={() => setIsProfile(true)}>
           <ListItemIcon><AccountCircleOutlined/></ListItemIcon>
           <ListItemText primary={'Profile'} />
-        </ListItem>
+        </ListItem>}
         <ListItem button key={'Add Task'} disabled={isAddingNewTask} onClick={onAddTask}>
           <ListItemIcon><Add/></ListItemIcon>
           <ListItemText primary={'Add Task'} />

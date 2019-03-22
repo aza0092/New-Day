@@ -24,8 +24,15 @@ function tasksReducer(state, action){
 }
 
 export default function App(){
+  const [isGuest, setIsGuest] = React.useState(false);
   const [signedIn, setSignedIn] = React.useState(false);
   const [tasks, dispatchTasks] = React.useReducer(tasksReducer, []);
+
+  React.useEffect(() => {
+    if (localStorage.getItem('isGuest')) {
+      localStorage.removeItem('isGuest');
+    }
+  }, []);
 
   function signIn(){
     setSignedIn(true);
@@ -33,8 +40,17 @@ export default function App(){
 
   function signOut(){
     dispatchTasks({type: 'RESET_TASKS'});
-    localStorage.removeItem('token');
-    setSignedIn(false);
+    if (isGuest) {
+      setIsGuest(false);
+    } else {
+      localStorage.removeItem('token');
+      setSignedIn(false);
+    }
+  }
+
+  function SignInAsGuest(){
+    localStorage.setItem('isGuest', "true");
+    setIsGuest(true);
   }
 
   React.useEffect(() => {
@@ -50,15 +66,23 @@ export default function App(){
     }
   }, []);
 
+  if (isGuest) {
+    return (
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <Layout tasks={tasks} dispatchTasks={dispatchTasks} signOut={signOut} isGuest={isGuest}/>
+      </MuiPickersUtilsProvider>
+    );
+  }
+
   if (!signedIn) {
     return (
-      <User signIn={signIn} />
+      <User signIn={signIn} signInAsGuest={SignInAsGuest} />
     );
   }
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <Layout tasks={tasks} dispatchTasks={dispatchTasks} signOut={signOut}/>
+      <Layout tasks={tasks} dispatchTasks={dispatchTasks} signOut={signOut}  isGuest={isGuest}/>
     </MuiPickersUtilsProvider>
   );
 }

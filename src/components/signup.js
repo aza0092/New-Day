@@ -46,6 +46,14 @@ const styles = theme => ({
   submit: {
     marginTop: theme.spacing.unit * 3
   },
+  guest: {
+    marginTop: theme.spacing.unit * 1.5,
+    width: '100%'
+  },
+  or: {
+    textAlign: 'center',
+    marginTop: theme.spacing.unit * 1.5
+  },
   progressWrapper: {
     width: '100%',
     display: 'flex',
@@ -62,7 +70,7 @@ const styles = theme => ({
 });
 
 function SignUp(props){
-  const {classes} = props;
+  const {classes, signInAsGuest} = props;
   const [email, _setEmail] = React.useState({value: '', error: false});
   const [password, _setPassword] = React.useState({value: '', error: false});
   const [passwordConfirmation, _setPasswordConfirmation] = React.useState({value: '', error: false});
@@ -173,9 +181,16 @@ function SignUp(props){
             <div className={classes.progressWrapper}>
               <CircularProgress className={classes.progress}/>
             </div> :
+            <React.Fragment>
             <Button className={classes.submit} type={'submit'} fullWidth variant={'contained'} color={'primary'}>
               Sign Up
-            </Button>}
+            </Button>
+              <Typography className={classes.or}>OR</Typography>
+              <Button className={classes.guest} variant={'contained'} color={'secondary'} onClick={signInAsGuest}>
+                Sign Up as Guest
+              </Button>
+            </React.Fragment>
+          }
         </form>
         <Typography className={classes.signin}>
           Already signed up? <Link component={'button'} onClick={() => props.setStatus('signin')}>Sign In</Link> now.
