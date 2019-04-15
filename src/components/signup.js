@@ -115,13 +115,13 @@ function SignUp(props){
         setSnackbarMessage('Successfully Signed Up');
       } else {
         setSnackbarVariant('error');
-        setSnackbarMessage('An Error Happened');
+        setSnackbarMessage(signupRes.data.error);
       }
     } catch (e) {
       console.log(e.message);
       setIsLoading(false);
       setSnackbarVariant('error');
-      setSnackbarMessage('An Error Happened');
+      setSnackbarMessage(e.message);
     }
   }
 

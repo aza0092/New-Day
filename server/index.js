@@ -75,7 +75,8 @@ function getHash(value) {
 
 // Database
 
-const db = new Sequelize('Task', 'root', '115500', {
+// was 115500
+const db = new Sequelize('Task', 'root', 'p@ssword123456', {
   host : 'localhost',
   dialect: 'mysql',
   operatorsAliases: false,
@@ -185,7 +186,7 @@ let staticPath = '';
 if (process.argv.includes('local')) {
   staticPath = path.resolve(process.argv[1], '..', 'public');
 } else {
-  staticPath = `/home/ubuntu/server/public`;
+  staticPath = `/home/ubuntu/server/build`;
 }
 app.use(cors());
 app.use(helmet());
@@ -362,15 +363,8 @@ app.get('/api/tasks', auth, async (req, res) => {
   }
 });
 
-/*
-app.post('/api/path/name', auth, async (req, res) => {
-
-});
-*/
-
-// Serving static files
 app.get('*', async (req, res) => {
-  res.sendFile('main.html', { root: staticPath });
+  res.sendFile('index.html', { root: staticPath });
 });
 
-app.listen(3001, () => console.log('Server is listening on 3001'));
+app.listen(80, () => console.log('Server is listening on port 80 for http'));

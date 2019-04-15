@@ -70,6 +70,7 @@ function ResponsiveLayout (props) {
   const [snackbarVariant, setSnackbarVariant] = React.useState('success');
   const [editorState, setEditorState] = React.useState(EditorState.createEmpty());
   React.useEffect(() => {
+    if (isGuest) return () => {};
     axios.get(constants.serverWith('/api/tasks'), {headers: {token: localStorage.getItem('token')}})
       .then((res) => {
         if (!res.data.error){
@@ -172,7 +173,6 @@ function ResponsiveLayout (props) {
       setCurrentTask(null);
       setEditorState(EditorState.createEmpty());
       setIsAddingNewTask(false);
-
     } catch (e) {
       console.log(e.message);
       setIsLoading(false);
