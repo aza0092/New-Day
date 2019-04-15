@@ -59,14 +59,11 @@ function Welcome(props){
                     <Typography className={classes.margin} variant={'h2'}><b>Your busy life deserves this</b></Typography>
                   </Grid>
                   <Grid item>
-                    <Typography className={classes.margin} variant={'h6'}>This is an award-winning app used by millions of people to stay organized and get more done</Typography>
+                    <Typography className={classes.margin} variant={'h6'}>A simple powerful todo list WebApp</Typography>
                   </Grid>
                   <Grid container item xs={12} justify={'center'} spacing={8}>
                     <Grid item xs={6} >
                       <Button className={classes.margin} variant={'contained'} color={'primary'} onClick={getStarted}>Get Started</Button>
-                    </Grid>
-                    <Grid item xs={6}>
-                      <Button className={classes.margin}>Get more info</Button>
                     </Grid>
                   </Grid>
                 </Grid>
@@ -74,46 +71,7 @@ function Welcome(props){
                   <img src={image1} className={classes.imageFirst} alt={'description 1'}/>
                 </Grid>
               </Grid>
-
-              <Grid container item xs={12} justify={'center'} className={classes.marginTopBottom}>
-                <Grid container xs={6} sm={3} spacing={8}>
-                  <img src={image2} className={classes.imageFirst} alt={'description 2'}/>
-                </Grid>
-                <Grid container item xs={6} sm={3} spacing={8} alignContent={'center'}>
-                  <Grid item>
-                    <Typography className={classes.margin} variant={'h2'}><b>Your busy life deserves this</b></Typography>
-                  </Grid>
-                  <Grid item>
-                    <Typography className={classes.margin} variant={'h6'}>This is an award-winning app used by millions of people to stay organized and get more done</Typography>
-                  </Grid>
-                  <Grid item>
-                    <Typography className={classes.margin} variant={'h6'}>This is an award-winning app used by millions of people to stay organized and get more done</Typography>
-                  </Grid>
-                </Grid>
-              </Grid>
-
-              <Grid container item xs={12} justify={'center'} className={classes.marginTopBottom}>
-                <Grid container item xs={6} sm={3} spacing={8} alignContent={'center'}>
-                  <Grid item>
-                    <Typography className={classes.margin} variant={'h2'}><b>Your busy life deserves this</b></Typography>
-                  </Grid>
-                  <Grid item>
-                    <Typography className={classes.margin} variant={'h6'}>This is an award-winning app used by millions of people to stay organized and get more done</Typography>
-                  </Grid>
-                  <Grid container item xs={12} justify={'center'} spacing={8}>
-                    <Grid item xs={6} >
-                      <Button className={classes.margin} variant={'contained'} color={'primary'} onClick={getStarted}>Get Started</Button>
-                    </Grid>
-                    <Grid item xs={6}>
-                      <Button className={classes.margin}>Get more info</Button>
-                    </Grid>
-                  </Grid>
-                </Grid>
-                <Grid container xs={6} sm={3} spacing={8}>
-                  <img src={image3} className={classes.imageFirst} alt={'description 3'}/>
-                </Grid>
-              </Grid>
-            </Grid>
+			</Grid>
           </Paper>
       }
     </main>
