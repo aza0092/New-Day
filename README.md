@@ -1,1 +1,1 @@
-live site: newday.work
+live site: http://newday.work/
