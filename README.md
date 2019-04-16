@@ -1,5 +1,7 @@
 Live Site: http://newday.work/
 
+Preview Demo: https://www.dropbox.com/s/cmp9l26d8bbuomh/New_Day_preview38.mp4
+
 # 'New Day' WebApp
 
 ![main screen](https://github.com/aza0092/New-Day/blob/master/src/media/3.jpg)
