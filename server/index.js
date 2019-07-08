@@ -41,7 +41,7 @@ function sendConfirmMail(userId, email){
   let lasttick = currenttick + margin2hours;
   let endpoint = 'http://localhost:3001/api/user/checkconfirmemail';
   let url = `${endpoint}?t=${cipherData(lasttick.toString())}&u=${cipherData(userId.toString())}`;
-  sendMail('karadumanhakan1@gmail.com', email, 'Confirm your email', `<p>Click <a href="${url}">this link</a> to confirm your e-mail. </p>`);
+  sendMail('alali@abdullah-alali.com', email, 'Confirm your email', `<p>Click <a href="${url}">this link</a> to confirm your e-mail. </p>`);
 }
 
 function cipherData(data){
