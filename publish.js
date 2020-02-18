@@ -41,5 +41,3 @@ function sendFile(command){
 }
 
 publishAll();
-
-// publishServer();
