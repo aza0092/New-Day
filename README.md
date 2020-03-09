@@ -1,4 +1,4 @@
-Live Site: http://newday.work/
+Live Site: http://newday.work/ (temporarily down)
 
 Preview Demo: https://www.dropbox.com/s/cmp9l26d8bbuomh/New_Day_preview38.mp4
 
